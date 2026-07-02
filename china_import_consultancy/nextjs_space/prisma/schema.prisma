@@ -1,0 +1,126 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/china_import_consultancy/nextjs_space/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  subject   String
+  message   String
+  locale    String   @default("tr")
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  categoryKey String
+  date        DateTime
+  image       String
+  imageIsPublic Boolean @default(true)
+  titleTr     String
+  titleEn     String
+  excerptTr   String
+  excerptEn   String
+  contentTr   String
+  contentEn   String
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryKey])
+  @@index([published])
+  @@index([slug])
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  icon        String   @default("Package")
+  image       String
+  imageIsPublic Boolean @default(true)
+  titleTr     String
+  titleEn     String
+  descTr      String
+  descEn      String
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+model SiteContent {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  category    String   // viral, previous, alibaba
+  titleTr     String
+  titleEn     String
+  descTr      String   @default("")
+  descEn      String   @default("")
+  image       String
+  imageIsPublic Boolean @default(true)
+  priceTr     String   @default("")
+  priceEn     String   @default("")
+  link        String   @default("")
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([published])
+  @@index([sortOrder])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  company   String   @default("")
+  role      String   @default("")
+  avatar    String   @default("")
+  textTr    String
+  textEn    String
+  rating    Int      @default(5)
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([published])
+  @@index([sortOrder])
+}
