@@ -1,0 +1,333 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/china_import_consultancy/nextjs_space/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// ============================================
+// USER & AUTHENTICATION
+// ============================================
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  password    String
+  name        String?
+  role        String   @default("admin")  // super_admin, admin, editor, viewer
+  avatar      String?
+  permissions String[] // Array of permission strings
+  lastLoginAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  pages       Page[]
+  activityLogs AdminActivityLog[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model AdminActivityLog {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  action     String   // create, update, delete, publish, login, logout
+  resource   String   // page, theme, user, blog, product, etc.
+  resourceId String?
+  details    String?  @db.Text  // JSON string of changes
+  ipAddress  String?
+  userAgent String?
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([resource])
+  @@index([createdAt])
+}
+
+// ============================================
+// PAGE MANAGEMENT
+// ============================================
+
+model Page {
+  id          String   @id @default(cuid())
+  slug        String   @unique      // URL path: /hakkimizda
+  titleTr     String
+  titleEn     String
+  contentTr   String   @db.Text     // Rich text / Markdown
+  contentEn   String   @db.Text
+  metaTitleTr String?
+  metaTitleEn String?
+  metaDescTr  String?
+  metaDescEn  String?
+  ogImage     String?
+  published   Boolean  @default(false)
+  showInNav   Boolean  @default(true)
+  navOrder    Int      @default(0)
+  layout      String   @default("default") // default, full-width, sidebar
+  customCss   String?  @db.Text
+  customJs    String?  @db.Text
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([published])
+  @@index([navOrder])
+  @@index([showInNav])
+}
+
+model NavigationItem {
+  id        String   @id @default(cuid())
+  labelTr   String
+  labelEn   String
+  href      String
+  parentId  String?  // For dropdown menus (self-referencing)
+  parent    NavigationItem?  @relation("NavHierarchy", fields: [parentId], references: [id])
+  children  NavigationItem[] @relation("NavHierarchy")
+  icon      String?  // Lucide icon name
+  target    String   @default("_self")  // _self, _blank
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+  @@index([published])
+  @@index([parentId])
+}
+
+// ============================================
+// THEME CONFIGURATION
+// ============================================
+
+model ThemeConfig {
+  id                    String   @id @default(cuid())
+
+  // Colors (HSL format)
+  primaryHue            Int      @default(221)    // Blue
+  primarySaturation     Int      @default(83)
+  primaryLightness      Int      @default(53)
+
+  accentHue             Int      @default(174)    // Teal
+  accentSaturation      Int      @default(60)
+  accentLightness       Int      @default(51)
+
+  secondaryHue          Int      @default(340)    // Pink
+  secondarySaturation   Int      @default(65)
+  secondaryLightness    Int      @default(60)
+
+  // Typography
+  bodyFont              String   @default("DM Sans")
+  headingFont           String   @default("Plus Jakarta Sans")
+  monoFont              String   @default("JetBrains Mono")
+  baseFontSize          Int      @default(16)     // px
+
+  // Border Radius
+  borderRadius          Float    @default(0.625)  // rem
+
+  // Spacing Scale
+  spacingUnit           Int      @default(8)      // px
+
+  // Dark Mode Colors
+  darkBackgroundHue     Int      @default(222)
+  darkBackgroundSat     Int      @default(84)
+  darkBackgroundLight   Int      @default(5)
+
+  // Features
+  enableDarkMode        Boolean  @default(true)
+
+  // Custom CSS
+  customCss             String?  @db.Text
+
+  updatedAt             DateTime @updatedAt
+
+  @@index([id])
+}
+
+// ============================================
+// SITE SETTINGS
+// ============================================
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+
+  // Site Info
+  siteNameTr     String?  @default("Çin'den Al Sat")
+  siteNameEn     String?  @default("China Import")
+  siteTaglineTr  String?
+  siteTaglineEn  String?
+  siteLogo       String?
+  siteFavicon    String?
+
+  // Contact Info
+  phone          String?
+  email          String?
+  whatsapp       String?
+  addressTr      String?  @db.Text
+  addressEn      String?  @db.Text
+
+  // Social Media
+  facebook       String?
+  instagram      String?
+  twitter        String?
+  youtube        String?
+  linkedin       String?
+
+  // SEO
+  defaultMetaTitleTr    String?
+  defaultMetaTitleEn    String?
+  defaultMetaDescTr     String?  @db.Text
+  defaultMetaDescEn     String?  @db.Text
+  defaultOgImage        String?
+  googleAnalyticsId     String?
+  googleSiteVerification String?
+
+  // Features
+  enableBlog         Boolean @default(true)
+  enableContactForm  Boolean @default(true)
+  enableTestimonials Boolean @default(true)
+
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
+
+// ============================================
+// CONTENT MODELS
+// ============================================
+
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  subject   String
+  message   String
+  locale    String   @default("tr")
+  status    String   @default("new")  // new, read, replied, archived
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  categoryKey String
+  date        DateTime
+  image       String
+  imageIsPublic Boolean @default(true)
+  titleTr     String
+  titleEn     String
+  excerptTr   String
+  excerptEn   String
+  contentTr   String   @db.Text
+  contentEn   String   @db.Text
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryKey])
+  @@index([published])
+  @@index([slug])
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  icon        String   @default("Package")
+  image       String
+  imageIsPublic Boolean @default(true)
+  titleTr     String
+  titleEn     String
+  descTr      String   @db.Text
+  descEn      String   @db.Text
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+model SiteContent {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String  @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  category    String   // viral, previous, alibaba
+  titleTr     String
+  titleEn     String
+  descTr      String   @default("")  @db.Text
+  descEn      String   @default("")  @db.Text
+  image       String
+  imageIsPublic Boolean @default(true)
+  priceTr     String   @default("")
+  priceEn     String   @default("")
+  link        String   @default("")
+  sortOrder   Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([published])
+  @@index([sortOrder])
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  company   String   @default("")
+  role      String   @default("")
+  avatar    String   @default("")
+  textTr    String   @db.Text
+  textEn    String   @db.Text
+  rating    Int      @default(5)
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([published])
+  @@index([sortOrder])
+}
+
+// ============================================
+// MEDIA LIBRARY
+// ============================================
+
+model MediaFile {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String
+  mimeType    String   // image/jpeg, image/png, etc.
+  size        Int      // bytes
+  url         String
+  altText     String?
+  folder      String?  // For organization
+  uploadedBy  String?  // User ID
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([mimeType])
+  @@index([folder])
+  @@index([createdAt])
+}
