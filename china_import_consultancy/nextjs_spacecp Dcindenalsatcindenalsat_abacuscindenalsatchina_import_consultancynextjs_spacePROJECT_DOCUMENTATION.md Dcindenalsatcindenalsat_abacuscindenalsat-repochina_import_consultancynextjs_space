@@ -1,0 +1,55 @@
+# ===========================================
+# China Import Consultancy - Environment Variables
+# ===========================================
+# Kopyala ve .env olarak kaydet, değerleri düzenle
+
+# -------------------------------------------
+# DATABASE (Production & Development)
+# -------------------------------------------
+# Production database connection string
+DATABASE_URL='postgresql://user:password@host:5432/database?connect_timeout=15'
+
+# Optional: Separate production database URL (if using multiple databases)
+PROD_DATABASE_URL='postgresql://user:password@host:5432/production_db?connect_timeout=15'
+
+# -------------------------------------------
+# NEXTAUTH (Authentication)
+# -------------------------------------------
+# NextAuth.js secret key - generate with: openssl rand -base64 32
+NEXTAUTH_SECRET='your-secret-key-here-minimum-32-chars'
+
+# NextAuth callback URL (adjust for your domain)
+NEXTAUTH_URL='http://localhost:3000'
+
+# -------------------------------------------
+# ABACUS AI (Email Notifications)
+# -------------------------------------------
+# Abacus AI API key for email notifications
+ABACUSAI_API_KEY='your-abacus-api-key'
+
+# Web app ID for Abacus notifications
+WEB_APP_ID='your-web-app-id'
+
+# Notification IDs for form submissions
+NOTIF_ID_CONTACT_FORM_SUBMISSION='notification-id-contact-form'
+NOTIF_ID_KAVAK_KONTRAPLAK_SIPARI_FORMU='notification-id-plywood-order'
+
+# -------------------------------------------
+# AWS S3 (Image Uploads)
+# -------------------------------------------
+# AWS credentials for S3 file uploads
+AWS_PROFILE='your-aws-profile'
+AWS_REGION='us-west-2'
+AWS_BUCKET_NAME='your-s3-bucket-name'
+AWS_FOLDER_PREFIX='47067/'
+
+# -------------------------------------------
+# DEVELOPMENT
+# -------------------------------------------
+NODE_ENV='development'
+
+# Optional: Custom build output directory
+# NEXT_OUTPUT_MODE='standalone'
+
+# Optional: Custom next.js output directory
+# NEXT_DIST_DIR='.next'
