@@ -53,6 +53,20 @@ else
     echo "⚠️ wrangler.jsonc'de 'services' bölümü var — WORKER_SELF_REFERENCE hatası olabilir"
     WARNINGS=$((WARNINGS + 1))
   fi
+  # main (worker entry point) tanımlı mı?
+  if grep -q '"main"' wrangler.jsonc 2>/dev/null; then
+    echo "✅ wrangler.jsonc'de 'main' tanımlı"
+  else
+    echo "❌ wrangler.jsonc'de 'main' eksik — Worker entry point gerekli"
+    ERRORS=$((ERRORS + 1))
+  fi
+  # assets.directory tanımlı mı?
+  if grep -q '"assets"' wrangler.jsonc 2>/dev/null; then
+    echo "✅ wrangler.jsonc'de 'assets' tanımlı"
+  else
+    echo "❌ wrangler.jsonc'de 'assets' eksik — statik dosyalar dizini gerekli"
+    ERRORS=$((ERRORS + 1))
+  fi
 fi
 
 # 3. package.json'da gerekli paketler var mı?
