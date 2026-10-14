@@ -67,6 +67,27 @@ else
     echo "❌ wrangler.jsonc'de 'assets' eksik — statik dosyalar dizini gerekli"
     ERRORS=$((ERRORS + 1))
   fi
+  # assets.binding tanımlı mı?
+  if grep -q '"binding"' wrangler.jsonc 2>/dev/null; then
+    echo "✅ wrangler.jsonc'de 'assets.binding' tanımlı"
+  else
+    echo "❌ wrangler.jsonc'de 'assets.binding' eksik — ASSETS binding gerekli"
+    ERRORS=$((ERRORS + 1))
+  fi
+  # compatibility_flags tanımlı mı?
+  if grep -q 'nodejs_compat' wrangler.jsonc 2>/dev/null; then
+    echo "✅ compatibility_flags: nodejs_compat tanımlı"
+  else
+    echo "❌ compatibility_flags: nodejs_compat eksik — Node.js API'leri için gerekli"
+    ERRORS=$((ERRORS + 1))
+  fi
+  # services (WORKER_SELF_REFERENCE) tanımlı mı?
+  if grep -q 'WORKER_SELF_REFERENCE' wrangler.jsonc 2>/dev/null; then
+    echo "✅ services: WORKER_SELF_REFERENCE tanımlı"
+  else
+    echo "⚠️ services: WORKER_SELF_REFERENCE eksik — OpenNext cache için gerekli olabilir"
+    WARNINGS=$((WARNINGS + 1))
+  fi
 fi
 
 # 3. package.json'da gerekli paketler var mı?
