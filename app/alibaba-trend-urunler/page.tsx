@@ -5,6 +5,21 @@ export const metadata: Metadata = {
   title: 'Alibaba\'dan Trend Ürünler | Çin\'den Al Sat',
   description: 'Alibaba\'da bu ay en çok satan 15 trend ürün. Gerçek tedarik fiyatları, Alibaba satıcı linkleri ve ithalat danışmanlığı.',
   keywords: ['Alibaba trend ürünler', 'Alibaba en çok satanlar', 'Çin tedarik', 'Alibaba ithalat', 'Çin den al sat', 'toptan ürünler'],
+  openGraph: {
+    title: 'Alibaba Trend Ürünler | Çin İthalat Danışmanlığı',
+    description: 'Alibaba\'daki en popüler 15 ürün — gerçek toptan fiyatlar ve tedarikçi linkleri.',
+    url: 'https://cindenalsat.com/alibaba-trend-urunler',
+    siteName: 'Çin\'den Al Sat',
+    images: [{ url: 'https://cindenalsat.com/images/fair-meeting.jpg', width: 1200, height: 630, alt: 'Alibaba Trend Ürünler' }],
+    locale: 'tr_TR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Alibaba Trend Ürünler | Çin İthalat Danışmanlığı',
+    description: 'Alibaba\'daki en popüler 15 ürün — gerçek toptan fiyatlar.',
+    images: ['https://cindenalsat.com/images/fair-meeting.jpg'],
+  },
 }
 
 export default function AlibabaTrendPage() {
