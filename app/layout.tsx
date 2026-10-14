@@ -140,6 +140,7 @@ export default function RootLayout({
                 'https://www.instagram.com/cindenal_ithalat/',
                 'https://www.youtube.com/channel/UCiXofJ92GDpJf06qM5gEI6g',
                 'https://x.com/CindenAlSat',
+                'https://www.pinterest.com/chinaimportconsultancy',
               ],
             }),
           }}
