@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Fully static site: `next build` emits plain HTML/CSS/JS into ./out
-  output: 'export',
+  // OpenNext requires standalone output for Cloudflare Pages
+  output: 'standalone',
   trailingSlash: true,
   productionBrowserSourceMaps: false,
   eslint: {
