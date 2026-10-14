@@ -19,5 +19,11 @@
   ],
   "observability": {
     "enabled": true
-  }
+  },
+  "routes": [
+    {
+      "pattern": "cindenalsat.com",
+      "custom_domain": true
+    }
+  ]
 }
