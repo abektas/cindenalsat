@@ -6,13 +6,16 @@ import { ChunkLoadErrorHandler } from '@/components/chunk-load-error-handler'
 import { LocaleProvider } from '@/lib/locale-context'
 import { SiteContentProvider } from '@/lib/site-content-context'
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://cindenalsat.com'
+const contactPhone = '+905053697425'
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' })
 const jakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-display' })
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
 
 export async function generateMetadata(): Promise<Metadata> {
-  const baseUrl = 'https://cindenalsat.com'
   return {
     metadataBase: new URL(baseUrl),
     title: {
@@ -36,13 +39,20 @@ export async function generateMetadata(): Promise<Metadata> {
       index: true,
       follow: true,
     },
+    alternates: {
+      canonical: baseUrl,
+      languages: {
+        'tr': baseUrl,
+        'en': `${baseUrl}/en`,
+      },
+    },
   }
 }
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <html lang="tr" suppressHydrationWarning>
@@ -52,16 +62,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'Organization',
+              '@type': 'ProfessionalService',
               name: "Çin'den Al Sat",
               alternateName: 'China Import Consultancy',
-              url: 'https://cindenalsat.com',
-              logo: 'https://cindenalsat.com/logo.png',
+              url: baseUrl,
+              logo: `${baseUrl}/cindenalsat-logo.jpg`,
               description:
                 "Çin'den ABD'ye ithalat danışmanlığı. Ürün tedariği, kalite kontrol, gümrükleme ve lojistik hizmetleri. ABD'deki Türk girişimcilere özel.",
               contactPoint: {
                 '@type': 'ContactPoint',
-                telephone: '+905053697425',
+                telephone: contactPhone,
                 contactType: 'customer service',
                 availableLanguage: ['Turkish', 'English'],
               },
@@ -69,6 +79,8 @@ export default function RootLayout({
                 '@type': 'PostalAddress',
                 addressCountry: 'TR',
               },
+              areaServed: ['US', 'TR'],
+              knowsLanguage: ['Turkish', 'English'],
               sameAs: [
                 'https://www.facebook.com/678806195312322',
                 'https://www.instagram.com/cindenal_ithalat/',

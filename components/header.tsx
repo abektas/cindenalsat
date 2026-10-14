@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLocale } from '@/lib/locale-context';
-import { Globe, Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -29,8 +29,6 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleLang = () => setLocale(locale === 'tr' ? 'en' : 'tr');
-
   return (
     <header
       className={cn(
@@ -44,7 +42,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <img src="/logo.png" alt="Çin'den Al Sat Logo" className="h-10 sm:h-12 w-auto object-contain" />
+            <img src="/cindenalsat-logo.jpg" alt="Çin'den Al Sat Logo" className="h-14 w-auto rounded-full ring-1 ring-border shadow-sm" />
           </a>
 
           {/* Desktop Nav */}
@@ -62,15 +60,24 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleLang}
-              className={cn('gap-1.5', !scrolled && 'text-white hover:bg-white/15 hover:text-white')}>
-              
-              <Globe className="w-4 h-4" />
-              <span className="text-xs font-semibold uppercase">{locale === 'tr' ? 'EN' : 'TR'}</span>
-            </Button>
+            {/* TR / EN segmented toggle */}
+            <div className={cn('flex items-center rounded-lg overflow-hidden border', scrolled ? 'border-border' : 'border-white/30')}>
+              {(['tr', 'en'] as const).map((code) => (
+                <button
+                  key={code}
+                  onClick={() => setLocale(code)}
+                  aria-label={code === 'tr' ? 'Türkçe' : 'English'}
+                  className={cn(
+                    'px-2.5 py-1 text-xs font-semibold uppercase transition-colors',
+                    locale === code
+                      ? 'bg-gradient-to-r from-blue-500 to-teal-400 text-white'
+                      : scrolled ? 'text-muted-foreground hover:bg-muted' : 'text-white/80 hover:bg-white/15'
+                  )}
+                >
+                  {code}
+                </button>
+              ))}
+            </div>
 
             <a href="tel:+905053697425" className="hidden sm:flex">
               <Button variant="outline" size="sm" className={cn('gap-1.5 bg-sky-700', !scrolled && 'border-white/40 text-white hover:bg-white/15 hover:text-white')}>

@@ -3,22 +3,22 @@ import { ProductShowcaseClient } from '@/components/product-showcase-client'
 
 export const metadata: Metadata = {
   title: 'Alibaba\'dan Trend Ürünler | Çin\'den Al Sat',
-  description: 'Alibaba\'da öne çıkan trend ürünleri keşfedin. Çin\'den güvenli tedarik ve ithalat danışmanlığı.',
-  keywords: ['Alibaba ürünleri', 'trend ürünler', 'Alibaba ithalat', 'Çin tedarik', 'Çin\'den al sat'],
+  description: 'Alibaba\'da bu ay en çok satan 15 trend ürün. Gerçek tedarik fiyatları, Alibaba satıcı linkleri ve ithalat danışmanlığı.',
+  keywords: ['Alibaba trend ürünler', 'Alibaba en çok satanlar', 'Çin tedarik', 'Alibaba ithalat', 'Çin den al sat', 'toptan ürünler'],
 }
 
 export default function AlibabaTrendPage() {
   return (
     <ProductShowcaseClient
       category="alibaba"
-      heroImage="https://cdn.abacus.ai/images/27f31c30-29ad-4d46-ac1e-e9c65da16d37.png"
-      heroTitle={{ tr: "Alibaba'dan Trend Ürünler", en: 'Trending Alibaba Products' }}
-      heroSubtitle={{ tr: 'Alibaba Seçkileri', en: 'Alibaba Picks' }}
+      heroImage="/images/fair-meeting.jpg"
+      heroTitle={{ tr: "Alibaba'dan Trend Ürünler", en: 'Trending Products on Alibaba' }}
+      heroSubtitle={{ tr: 'Bu Ayın En Çok Satan 15 Ürünü', en: 'Top 15 Best Sellers This Month' }}
       heroDescription={{
-        tr: "Alibaba'da öne çıkan ürünleri keşfedin, güvenli tedarik süreciyle ithalatınızı kolaylaştıralım.",
-        en: 'Discover trending products on Alibaba and let us simplify your import process with secure sourcing.',
+        tr: "Alibaba'da bu ay en çok satan, TikTok'ta viral olan ve en yeni trend ürünleri. Gerçek tedarik fiyatları ve Alibaba satıcı linkleri ile birlikte.",
+        en: 'The most sold, TikTok viral and newest trending products on Alibaba this month. With real wholesale prices and Alibaba supplier links.',
       }}
-      emptyMessage={{ tr: 'Yakında ürünler eklenecek', en: 'Products coming soon' }}
+      emptyMessage={{ tr: 'Ürünler yükleniyor', en: 'Loading products' }}
     />
   )
 }

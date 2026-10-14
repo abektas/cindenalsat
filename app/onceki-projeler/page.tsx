@@ -11,7 +11,7 @@ export default function OncekiProjelerPage() {
   return (
     <ProductShowcaseClient
       category="previous"
-      heroImage="https://cdn.abacus.ai/images/2ca951af-5860-4c9a-803f-10811c013375.png"
+      heroImage="/images/client-matching.jpg"
       heroTitle={{ tr: 'Önceki Proje Ürünleri', en: 'Previous Project Products' }}
       heroSubtitle={{ tr: 'Portföyümüz', en: 'Our Portfolio' }}
       heroDescription={{

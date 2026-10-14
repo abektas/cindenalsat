@@ -2,13 +2,10 @@
 
 import { useLocale } from '@/lib/locale-context'
 import { Phone, Mail, MessageSquare, BookOpen, Facebook, Instagram, Youtube } from 'lucide-react'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export function Footer() {
   const { locale, t } = useLocale()
-  const [year, setYear] = useState(2026)
-  useEffect(() => { setYear(new Date().getFullYear()) }, [])
 
   return (
     <footer className="bg-card border-t py-12">
@@ -17,7 +14,7 @@ export function Footer() {
           {/* Brand */}
           <div className="flex items-center gap-3">
             <a href="/" className="flex items-center gap-3 group">
-              <img src="/logo.png" alt="Çin'den Al Sat Logo" className="h-12 w-auto object-contain" />
+              <img src="/cindenalsat-logo.jpg" alt="Çin'den Al Sat Logo" className="h-14 w-auto rounded-full ring-1 ring-border shadow-sm" />
               <div>
                 <p className="font-display font-bold">Çin&apos;den Al Sat</p>
                 <p className="text-xs text-muted-foreground">{t?.footer?.description ?? ''}</p>
@@ -53,10 +50,6 @@ export function Footer() {
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
-        </div>
-
-        <div className="mt-8 pt-6 border-t text-center text-sm text-muted-foreground">
-          © {year} Çin&apos;den Al Sat İthalat Danışmanlığı. {t?.footer?.rights ?? ''}
         </div>
       </div>
     </footer>

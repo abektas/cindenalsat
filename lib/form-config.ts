@@ -6,7 +6,7 @@
  * arrives by e-mail. It is a PUBLIC key — it ships inside the client bundle by
  * design, so it is safe to keep in the repository.
  */
-export const WEB3FORMS_ACCESS_KEY = 'REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY'
+export const WEB3FORMS_ACCESS_KEY = 'c9e99be3-30f3-45fc-8b6d-a7b0b501a076'
 
 export const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 

@@ -14,6 +14,7 @@ export function ContactSection() {
   const { locale, t } = useLocale()
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
   const [formState, setFormState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [errors, setErrors] = useState<Record<string, string>>({})
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -23,13 +24,28 @@ export function ContactSection() {
     message: '',
   })
 
+  const validate = (f: typeof form): Record<string, string> => {
+    const errs: Record<string, string> = {}
+    if (!f.name.trim()) errs.name = locale === 'tr' ? 'Adınızı girin' : 'Please enter your name'
+    if (!f.email.trim()) errs.email = locale === 'tr' ? 'E-posta adresinizi girin' : 'Please enter your email'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) errs.email = locale === 'tr' ? 'Geçerli bir e-posta girin' : 'Enter a valid email'
+    if (!f.subject.trim()) errs.subject = locale === 'tr' ? 'Konuyu girin' : 'Please enter a subject'
+    if (!f.message.trim()) errs.message = locale === 'tr' ? 'Mesajınızı yazın' : 'Please write your message'
+    else if (f.message.trim().length < 10) errs.message = locale === 'tr' ? 'Mesaj en az 10 karakter olmalı' : 'Message must be at least 10 characters'
+    return errs
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e?.target ?? {}
     setForm((prev: any) => ({ ...(prev ?? {}), [name ?? '']: value ?? '' }))
+    if (name && errors[name]) setErrors((prev) => { const next = { ...prev }; delete next[name]; return next })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e?.preventDefault?.()
+    const errs = validate(form)
+    setErrors(errs)
+    if (Object.keys(errs).length > 0) return
     setFormState('sending')
     try {
       const res = await fetch(WEB3FORMS_ENDPOINT, {
@@ -59,6 +75,11 @@ export function ContactSection() {
       setFormState('error')
     }
   }
+
+  const errCls = (field: string) => errors[field] ? 'border-red-500 focus-visible:ring-red-500' : ''
+  const errMsg = (field: string) => errors[field] ? (
+    <p className="text-xs text-red-500 mt-1">{errors[field]}</p>
+  ) : null
 
   const contactInfo = [
     { icon: Phone, label: t?.contact?.info?.phone ?? 'Phone', value: '+90 505 369 74 25', href: 'tel:+905053697425' },
@@ -143,7 +164,9 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     placeholder={t?.contact?.form?.name ?? 'Name'}
+                    className={errCls('name')}
                   />
+                  {errMsg('name')}
                 </div>
                 <div>
                   <label className="text-sm font-medium mb-1.5 block">{t?.contact?.form?.email ?? 'Email'} *</label>
@@ -154,7 +177,9 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     placeholder={t?.contact?.form?.email ?? 'Email'}
+                    className={errCls('email')}
                   />
+                  {errMsg('email')}
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
@@ -185,7 +210,9 @@ export function ContactSection() {
                   onChange={handleChange}
                   required
                   placeholder={t?.contact?.form?.subject ?? 'Subject'}
+                  className={errCls('subject')}
                 />
+                {errMsg('subject')}
               </div>
               <div>
                 <label className="text-sm font-medium mb-1.5 block">{t?.contact?.form?.message ?? 'Message'} *</label>
@@ -196,7 +223,9 @@ export function ContactSection() {
                   required
                   rows={5}
                   placeholder={t?.contact?.form?.message ?? 'Message'}
+                  className={errCls('message')}
                 />
+                {errMsg('message')}
               </div>
 
               {formState === 'success' && (

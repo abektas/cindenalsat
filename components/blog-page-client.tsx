@@ -48,8 +48,19 @@ export function BlogPageClient() {
       <Header />
 
       {/* Hero Banner */}
-      <section className="pt-28 pb-12 sm:pt-32 sm:pb-16 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+      <section className="relative pt-28 pb-12 sm:pt-32 sm:pb-16 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/blog-hero.jpg"
+            alt="Çin'den Al Sat Logo"
+            fill
+            className="object-cover opacity-20"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-blue-900/90 to-gray-900/95" />
+        </div>
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

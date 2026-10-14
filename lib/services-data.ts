@@ -72,13 +72,13 @@ export const services: ServiceItem[] = [
     "sortOrder": 5
   },
   {
-    "key": "Dahilde İşleme Rejimi ile İthalat",
-    "icon": "Package",
-    "image": "/images/service-dahilde-isleme-rejimi.png",
-    "titleTr": "Dahilde İşleme Rejimi ile Kontrplak İthalatı",
-    "titleEn": "Import of Plywood under the Inward Processing Regime",
-    "descTr": "Türkiye'de üretim yapan firmalara, ihraç ürünlerinin üretiminde kullanılmak üzere hammadde ve yarı mamulleri gümrük vergisi, KDV ve diğer vergilerden muaf olarak ithal etmeleri konularında yardımcı oluyoruz.",
-    "descEn": "We assist companies manufacturing in Türkiye in importing raw materials and semi-finished products for use in the production of their export goods, free from customs duties, VAT, and other taxes.",
+    "key": "us-compliance",
+    "icon": "FileCheck",
+    "image": "/images/img-customs.png",
+    "titleTr": "ABD Gümrük Uyumluluğu",
+    "titleEn": "US Customs Compliance",
+    "descTr": "HTS kodu belirleme, Section 301 tarife analizi, ISF beyanı ve ABD gümrük mevzuatına tam uyum süreçleriyle ithalatınızı risksiz yönetiyoruz.",
+    "descEn": "HTS code determination, Section 301 tariff analysis, ISF filing and full compliance with US customs regulations to keep your imports risk-free.",
     "sortOrder": 6
   }
 ]

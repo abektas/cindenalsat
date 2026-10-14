@@ -9,31 +9,31 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 
 const heroSlides = [
 {
-  src: '/hero-slides/slide-1.jpg',
-  alt: 'Çinden Al - Çin İthalat Danışmanlığı'
+  src: '/images/trade-center.jpg',
+  alt: "Shenzhen dünya ticaret merkezi ziyaretleri - Çin'den ABD'ye ithalat danışmanlığı"
 },
 {
-  src: '/hero-slides/slide-2.jpg',
-  alt: 'Kanton Fuarı - Canton Fair China'
+  src: '/images/fair-meeting.jpg',
+  alt: 'Çin fuarlarında müşteri ve iş ortağı buluşmaları'
 },
 {
-  src: '/hero-slides/slide-3.jpg',
-  alt: 'Çin tedarikçi ziyareti - China supplier visit'
+  src: '/images/supplier-meeting.jpg',
+  alt: 'Tedarikçi fabrikalarında yerinde strateji toplantıları'
 },
 {
-  src: '/hero-slides/slide-4.jpg',
-  alt: 'Çin iş ilişkileri - China business relations'
+  src: '/images/retail-visit.jpg',
+  alt: 'Satış mağazalarını yerinde ziyaret ve ürün analizi'
 },
 {
-  src: '/hero-slides/slide-5.webp',
-  alt: 'Çin ithalat süreçleri - China import processes'
+  src: '/images/team-meeting.jpg',
+  alt: "Çin'den Al Sat danışmanlık ekibi iş ortaklarıyla buluşmada"
 }];
 
 
 const SLIDE_INTERVAL = 5000; // 5 seconds
 
 export function HeroSection() {
-  const { t } = useLocale();
+  const { locale, t } = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isMounted, setIsMounted] = useState(false);
@@ -112,7 +112,7 @@ export function HeroSection() {
         </AnimatePresence>
 
         {/* Gradient overlay */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/50 via-black/30 to-black/10" />
       </div>
 
       {/* Content */}
@@ -144,7 +144,7 @@ export function HeroSection() {
               </Button>
             </a>
             <a href="#services">
-              <Button variant="outline" size="lg" className="gap-2 text-sm text-white border-black bg-sky-700 backdrop-blur-sm hover:bg-white/20 hover:text-white" style={{ border: '0px', borderRadius: '0px', left: '0px', width: '203px' }}>
+              <Button variant="outline" size="lg" className="gap-2 text-sm text-white border-white/40 bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:border-white/60">
                 {t?.hero?.cta2 ?? 'Services'}
               </Button>
             </a>
@@ -158,9 +158,9 @@ export function HeroSection() {
             className="flex flex-wrap gap-6 mt-12">
             
             {[
-            { icon: Shield, label: locale_safe('Güvenilir Tedarikçiler', 'Trusted Suppliers') },
-            { icon: Zap, label: locale_safe('Hızlı Süreç', 'Fast Process') },
-            { icon: Globe2, label: locale_safe('Global Teslimat', 'Global Delivery') }]?.
+            { icon: Shield, label: locale === 'tr' ? 'Güvenilir Tedarikçiler' : 'Trusted Suppliers' },
+            { icon: Zap, label: locale === 'tr' ? 'Hızlı Süreç' : 'Fast Process' },
+            { icon: Globe2, label: locale === 'tr' ? 'Global Teslimat' : 'Global Delivery' }]?.
             map?.((badge: any, idx: number) =>
             <div key={idx} className="flex items-center gap-2 text-sm text-white/80">
                 <badge.icon className="w-4 h-4 text-teal-300" />
@@ -227,8 +227,4 @@ export function HeroSection() {
       </div>
     </section>);
 
-}
-
-function locale_safe(tr: string, en: string) {
-  return typeof window !== 'undefined' && document?.documentElement?.lang === 'en' ? en : tr;
 }
