@@ -13,12 +13,33 @@ WARNINGS=0
 echo "🔍 Pre-build kontrolleri başlıyor..."
 echo ""
 
-# 1. open-next.config.ts var mı?
+# 1. open-next.config.ts var mı ve doğru mu?
 if [ ! -f "open-next.config.ts" ]; then
   echo "❌ open-next.config.ts eksik — OpenNext Cloudflare build için gerekli"
   ERRORS=$((ERRORS + 1))
 else
   echo "✅ open-next.config.ts var"
+  # converter: edge kontrolü
+  if grep -q "converter.*edge" open-next.config.ts; then
+    echo "✅ open-next.config.ts'de converter: 'edge' var"
+  else
+    echo "❌ open-next.config.ts'de converter: 'edge' eksik — aws-apigw-v2 ile uyumsuz"
+    ERRORS=$((ERRORS + 1))
+  fi
+  # wrapper: cloudflare-node kontrolü
+  if grep -q "wrapper.*cloudflare-node" open-next.config.ts; then
+    echo "✅ open-next.config.ts'de wrapper: 'cloudflare-node' var"
+  else
+    echo "❌ open-next.config.ts'de wrapper: 'cloudflare-node' eksik — converter: edge ile uyumsuz"
+    ERRORS=$((ERRORS + 1))
+  fi
+  # middleware.external kontrolü
+  if grep -q "external.*true" open-next.config.ts; then
+    echo "✅ middleware.external: true var"
+  else
+    echo "⚠️ middleware.external: true eksik — OpenNext middleware için gerekli"
+    WARNINGS=$((WARNINGS + 1))
+  fi
 fi
 
 # 2. wrangler.jsonc var mı ve doğru mu?
