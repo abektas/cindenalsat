@@ -72,4 +72,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://cindenalsat.com/sitemap.xml
+#
+# RSS Feed
+# https://cindenalsat.com/rss.xml
 Host: https://cindenalsat.com
