@@ -31,3 +31,9 @@ Thumbs.db
 
 # Prisma (artık kullanılmıyor — statik site)
 prisma/*.db
+
+# OpenNext / Wrangler build çıktısı
+.open-next/
+.wrangler/
+.dev.vars
+
