@@ -67,6 +67,46 @@ Allow: /
 User-agent: ImagesiftBot
 Allow: /
 
+# Çin menşeli AI botlar
+User-agent: QwenBot
+Allow: /
+
+User-agent: TongyiBot
+Allow: /
+
+User-agent: AliyunBot
+Allow: /
+
+User-agent: QuarkBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: TencentBot
+Allow: /
+
+User-agent: Sogou
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: KimiBot
+Allow: /
+
+User-agent: DeepSeekBot
+Allow: /
+
+User-agent: ZhipuBot
+Allow: /
+
+User-agent: Toutiaospider
+Allow: /
+
+User-agent: Shenma
+Allow: /
+
 # General — allow all
 User-agent: *
 Allow: /
