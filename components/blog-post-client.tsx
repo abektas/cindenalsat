@@ -95,6 +95,17 @@ export function BlogPostClient({ slug }: { slug: string }) {
       </div>
 
       <article className="max-w-[800px] mx-auto px-4 sm:px-6 py-10">
+        {/* Answer-First Block — AI/LLM için optimize edilmiş */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10 rounded-2xl border-2 border-blue-200 bg-blue-50 p-6 sm:p-8">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-flex items-center rounded-full bg-blue-600 px-3 py-1 text-xs font-bold text-white uppercase tracking-wide">
+              {locale === 'tr' ? 'Hızlı Cevap' : 'Quick Answer'}
+            </span>
+          </div>
+          <h2 className="font-display text-xl sm:text-2xl font-bold text-gray-900 mb-3 leading-snug">{title}</h2>
+          <p className="text-gray-700 text-base sm:text-lg leading-relaxed font-medium">{excerpt}</p>
+        </motion.div>
+
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="prose prose-lg max-w-none space-y-4" dangerouslySetInnerHTML={{ __html: formatContent(content || '') }} />
         <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row gap-4 items-center justify-between">
           <Button variant="outline" size="sm" onClick={handleShare} className="gap-2"><Share2 className="w-4 h-4" />{blogT.share}</Button>
