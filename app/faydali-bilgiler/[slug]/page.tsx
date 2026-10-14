@@ -3,7 +3,7 @@ import { blogPosts, getPostBySlug } from '@/lib/blog-data'
 import type { Metadata } from 'next'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 /** Every blog post becomes a real static page — no database, no server. */
@@ -11,8 +11,9 @@ export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }))
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const post = getPostBySlug(params.slug)
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const post = getPostBySlug(slug)
   if (!post) {
     return { title: "Yazı Bulunamadı | Çin'den Al Sat" }
   }
@@ -28,6 +29,7 @@ export function generateMetadata({ params }: Props): Metadata {
   }
 }
 
-export default function BlogPostPage({ params }: Props) {
-  return <BlogPostClient slug={params.slug} />
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params
+  return <BlogPostClient slug={slug} />
 }
