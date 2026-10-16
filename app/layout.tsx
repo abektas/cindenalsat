@@ -32,8 +32,9 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
     },
     icons: {
-      icon: '/favicon.svg',
-      shortcut: '/favicon.svg',
+      icon: [{ url: '/favicon.ico', sizes: 'any' }],
+      shortcut: '/favicon.ico',
+      apple: '/apple-touch-icon.png',
     },
     viewport: {
       width: 'device-width',
