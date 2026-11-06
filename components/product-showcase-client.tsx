@@ -1,6 +1,7 @@
 'use client'
 
 import { getProductsByCategory } from '@/lib/products-data'
+import { getProductCardState, getProductRefreshProducts } from '@/lib/product-refresh-catalog'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import Image from 'next/image'
@@ -18,7 +19,7 @@ type ProductShowcaseProps = {
 
 export function ProductShowcaseClient({ category, heroImage, heroTitle, heroSubtitle, heroDescription, emptyMessage }: ProductShowcaseProps) {
   const isTr = typeof window !== 'undefined' ? !window.location.pathname.startsWith('/en') : true
-  const products = getProductsByCategory(category)
+  const products = getProductRefreshProducts(category) ?? getProductsByCategory(category)
 
   return (
     <div className="min-h-screen bg-white">
@@ -65,51 +66,65 @@ export function ProductShowcaseClient({ category, heroImage, heroTitle, heroSubt
             </div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((p: any) => (
-                <div key={p.id} className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden">
-                  <div className="relative aspect-square bg-white border-b border-gray-100 overflow-hidden">
-                    <div className="absolute inset-4 sm:inset-6 flex items-center justify-center">
-                      <Image
-                        src={p.image}
-                        alt={isTr ? p.titleTr : p.titleEn || p.titleTr}
-                        fill
-                        className="object-contain group-hover:scale-105 transition-transform duration-500"
-                        unoptimized
-                      />
+              {products.map((p) => {
+                const card = getProductCardState(p, isTr)
+                return (
+                  <div key={p.id} className="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 overflow-hidden">
+                    <div className="relative aspect-square bg-white border-b border-gray-100 overflow-hidden">
+                      {card.imageSrc ? (
+                        <div className="absolute inset-4 sm:inset-6 flex items-center justify-center">
+                          <Image
+                            src={card.imageSrc}
+                            alt={isTr ? p.titleTr : p.titleEn || p.titleTr}
+                            fill
+                            className="object-contain group-hover:scale-105 transition-transform duration-500"
+                            unoptimized
+                          />
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center p-8 text-center text-sm text-gray-500">
+                          {isTr ? 'Ürün görseli incelemede' : 'Product image under review'}
+                        </div>
+                      )}
+                      {(card.retailPrice || card.supplierStatus) && (
+                        <div className="absolute bottom-3 right-3 flex flex-col items-end gap-1">
+                          {card.retailPrice && (
+                            <span className="px-2.5 py-0.5 rounded-full bg-blue-500 text-white text-xs font-semibold shadow-lg">
+                              {card.retailLabel}: {card.retailPrice}
+                            </span>
+                          )}
+                          {card.supplierStatus && (
+                            <span className="px-2.5 py-0.5 rounded-full bg-amber-500 text-white text-xs font-semibold shadow-lg">
+                              {card.statusLabel} {card.supplierStatus}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
-                    {(p.priceEn || p.priceTr) && (
-                      <div className="absolute bottom-3 right-3 flex flex-col items-end gap-1">
-                        {p.priceEn && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-blue-500 text-white text-xs font-semibold shadow-lg">
-                            Amazon: {p.priceEn}
-                          </span>
-                        )}
-                        {p.priceTr && (
-                          <span className="px-2.5 py-0.5 rounded-full bg-teal-500 text-white text-xs font-semibold shadow-lg">
-                            {isTr ? 'Fabrika Çıkış Fiyatı:' : 'Factory Price:'} {p.priceTr}
-                          </span>
-                        )}
-                      </div>
-                    )}
+                    <div className="p-5">
+                      <h3 className="font-display font-bold text-gray-900 mb-2 line-clamp-2">
+                        {isTr ? p.titleTr : (p.titleEn || p.titleTr)}
+                      </h3>
+                      {card.description && (
+                        <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                          {card.description}
+                        </p>
+                      )}
+                      {card.supplierNote && (
+                        <p className="text-amber-700 text-xs leading-relaxed mb-3">
+                          {card.supplierNote}
+                        </p>
+                      )}
+                      {card.sourceLinks.map((source) => (
+                        <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" className="mb-2 mr-4 inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-700 font-medium">
+                          <ExternalLink className="w-3.5 h-3.5" />
+                          {source.label}
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                  <div className="p-5">
-                    <h3 className="font-display font-bold text-gray-900 mb-2 line-clamp-2">
-                      {isTr ? p.titleTr : (p.titleEn || p.titleTr)}
-                    </h3>
-                    {(isTr ? p.descTr : p.descEn) && (
-                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">
-                        {isTr ? p.descTr : (p.descEn || p.descTr)}
-                      </p>
-                    )}
-                    {p.link && (
-                      <a href={p.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-700 font-medium">
-                        <ExternalLink className="w-3.5 h-3.5" />
-                        {isTr ? 'Detay Gör' : 'View Details'}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           )}
         </div>

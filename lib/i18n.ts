@@ -9,9 +9,9 @@ export const translations = {
       about: 'Hakkımızda',
       blog: 'Faydalı Bilgiler',
       plywood: 'ABD İthalat Rehberi',
-      viral: 'Viral Ürünler',
+      viral: 'Trend Ürün Adayları',
       previous: 'Önceki Projeler',
-      alibaba: 'Alibaba Trend',
+      alibaba: 'Tedarik Adayları',
       contact: 'İletişim',
     },
     hero: {
@@ -175,9 +175,9 @@ export const translations = {
       about: 'About Us',
       blog: 'Useful Info',
       plywood: 'US Import Guide',
-      viral: 'Viral Products',
+      viral: 'Trend Candidates',
       previous: 'Past Projects',
-      alibaba: 'Alibaba Trends',
+      alibaba: 'Supplier Candidates',
       contact: 'Contact',
     },
     hero: {
