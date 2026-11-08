@@ -1,0 +1,22 @@
+# disavow.txt — cindenalsat.com
+# Tarih: 8 Kasım 2026
+# Kaynak: OpenSEO ücretsiz backlink checker + spam score checker (DataForSEO verisi)
+#
+# ÖNEMLİ: Bu, ücretsiz araçtan görünen 11 domain. Tam liste için
+# Google Search Console → Links → External links → Export gerekli.
+# GSC'de Manual Actions cezası yoksa disavow genelde gereksizdir —
+# yüklemeden önce o sayfayı kontrol et.
+#
+# Yükleme: https://search.google.com/search-console/disavow-links
+
+domain:drjack.world
+domain:onvaxs.com
+domain:anchorurl.cloud
+domain:bazerdaily.com
+domain:screenshots.wiki
+domain:urls-shortener.eu
+domain:sites.jake.eu
+domain:onlyhealthydeals.com
+domain:bestwebs123.site
+domain:clonidine01mg.store
+domain:connectedcannabis.shop

@@ -9,9 +9,9 @@ const pagePath = '/mosaic-lamp-supplies'
 const ogImage = `${baseUrl}/images/mosaic/og-mosaic-lamp-supplies.jpg`
 
 export const metadata: Metadata = {
-  title: 'Wholesale Mosaic Lamp Supplies: Glass Cuts, Beads & Globes',
+  title: 'Wholesale Mosaic Lamp Workshop Supplies, Sourced from China',
   description:
-    'Wholesale mosaic lamp supplies from factories in Shenzhen, Zhongshan, Jiangmen, Hangzhou, Ningbo and Zhengzhou: 2 mm electroplated glass cuts in twelve colors, 3 mm acrylic beads, 11 cm and 13 cm glass globes, metal fittings and kit-ready packaging. Sourcing, quality control, shipping and door delivery to the United States handled for you.',
+    'Wholesale mosaic lamp workshop supplies: 2 mm electroplated glass cuts in twelve colors, 3 mm acrylic beads, 11 cm and 13 cm glass globes, metal fittings and kit-ready packaging. Sourced from factories in Shenzhen, Zhongshan, Jiangmen, Hangzhou, Ningbo and Zhengzhou, checked before shipment and delivered door to door to Turkish mosaic lamp workshops in the United States.',
   keywords: [
     'mosaic lamp supplies',
     'wholesale mosaic glass',
@@ -26,15 +26,17 @@ export const metadata: Metadata = {
     'mosaic lamp kit wholesale',
     'mosaic supplies Zhongshan',
     'mosaic lamp manufacturer China',
+    'mosaic lamp workshop',
+    'turkish mosaic lamp workshop',
   ],
   alternates: {
     canonical: `${baseUrl}${pagePath}`,
     languages: { en: `${baseUrl}${pagePath}` },
   },
   openGraph: {
-    title: 'Wholesale Mosaic Lamp Supplies, Delivered Door to Door',
+    title: 'Wholesale Mosaic Lamp Workshop Supplies, Sourced from China',
     description:
-      'Glass cuts in twelve colors, acrylic beads, globes, fittings and kit-ready packaging for mosaic lamp workshops in the United States. We source, check, consolidate and deliver.',
+      'Mosaic lamp workshop supplies: glass cuts in twelve colors, acrylic beads, globes, fittings and kit-ready packaging, sourced from China and delivered door to door in the United States. We source, check, consolidate and deliver.',
     url: `${baseUrl}${pagePath}`,
     siteName: "Çin'den Al Sat",
     images: [{ url: ogImage, width: 1200, height: 630, alt: 'Mosaic lamp with glass mosaic shade' }],
@@ -43,9 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Wholesale Mosaic Lamp Supplies, Delivered Door to Door',
+    title: 'Wholesale Mosaic Lamp Workshop Supplies, Sourced from China',
     description:
-      'Glass cuts, beads, globes, fittings and kit-ready packaging for mosaic lamp workshops. Sourcing and delivery from China to the USA handled end to end.',
+      'Mosaic lamp workshop supplies: glass cuts, beads, globes, fittings and kit-ready packaging. Sourcing and delivery from China to the USA handled end to end.',
     images: [ogImage],
   },
   robots: { index: true, follow: true },
@@ -196,7 +198,7 @@ export default function MosaicLampSuppliesPage() {
           <div className="grid items-center gap-10 pb-12 pt-14 lg:grid-cols-12 lg:gap-16 lg:pb-16 lg:pt-20">
             <div className="lg:col-span-5 lg:pb-24">
               <h1 className="font-display text-[2.6rem] leading-[1.03] tracking-tight sm:text-6xl lg:text-[4.2rem]">
-                Mosaic lamp supplies,
+                Mosaic lamp workshop supplies,
                 <br />
                 delivered door to door.
               </h1>
@@ -487,6 +489,29 @@ export default function MosaicLampSuppliesPage() {
                 placed.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Workshop materials ───────────────────────────────────────────── */}
+      <section id="workshop-materials" className="scroll-mt-20 border-b border-border bg-muted/40">
+        <div className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8 lg:px-12 lg:py-24">
+          <div className="max-w-3xl">
+            <h2 className="font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl">
+              Turkish mosaic lamp workshop materials, direct from the factory.
+            </h2>
+            <p className="mt-6 text-lg text-muted-foreground">
+              A Turkish mosaic lamp workshop runs on the same five consumables: glass cuts, acrylic
+              beads, glass globes, metal fittings and adhesive. We buy each one by specification
+              from manufacturers in Shenzhen, Zhongshan, Jiangmen, Hangzhou, Ningbo and Zhengzhou,
+              keep a sample of every lot, and ship them consolidated to your workshop in the United
+              States.
+            </p>
+            <p className="mt-5 text-lg text-muted-foreground">
+              Because those parts come from more than one factory, we consolidate them into a
+              single shipment. One carton, one customs entry, one delivery &mdash; not six separate
+              parcels with six tracking numbers.
+            </p>
           </div>
         </div>
       </section>
