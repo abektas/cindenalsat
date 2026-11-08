@@ -12,6 +12,7 @@ export const translations = {
       viral: 'Trend Ürün Adayları',
       previous: 'Önceki Projeler',
       alibaba: 'Tedarik Adayları',
+      mosaic: 'Mozaik Lamba Tedarik',
       contact: 'İletişim',
     },
     hero: {
@@ -178,6 +179,7 @@ export const translations = {
       viral: 'Trend Candidates',
       previous: 'Past Projects',
       alibaba: 'Supplier Candidates',
+      mosaic: 'Mosaic Lamp Supplies',
       contact: 'Contact',
     },
     hero: {

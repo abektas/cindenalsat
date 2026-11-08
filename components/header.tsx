@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 const navItems = [
 { key: 'home', href: '/#hero' },
 { key: 'services', href: '/#services' },
+{ key: 'mosaic', href: '/mosaic-lamp-supplies' },
 { key: 'plywood', href: '/abd-ithalat' },
 { key: 'viral', href: '/viral-urunler' },
 { key: 'previous', href: '/onceki-projeler' },
