@@ -1,13 +1,19 @@
 # disavow.txt — cindenalsat.com
-# Tarih: 8 Kasım 2026
-# Kaynak: OpenSEO ücretsiz backlink checker + spam score checker (DataForSEO verisi)
 #
-# ÖNEMLİ: Bu, ücretsiz araçtan görünen 11 domain. Tam liste için
-# Google Search Console → Links → External links → Export gerekli.
-# GSC'de Manual Actions cezası yoksa disavow genelde gereksizdir —
-# yüklemeden önce o sayfayı kontrol et.
+# ⚠️ DURUM (9 Kas 2026): YÜKLENMESİNE GEREK YOK.
 #
-# Yükleme: https://search.google.com/search-console/disavow-links
+# GSC doğrulaması sonucu:
+#   - GSC Links raporu: 1 dış link (pinterest.com) — DataForSEO: 53 link.
+#     Fark, Google'ın PBN spam'i zaten saymamasından kaynaklanıyor.
+#   - GSC'de elle ceza yok.
+#   - Property türü: sc-domain:cindanalsat.com → DOMAIN PROPERTY.
+#     Disavow toolu Domain property'leri DESTEKLEMEZ (Google'ın kuralı).
+#
+# Google'ın kendi rehberi: "most sites will not need to use this tool".
+# Bu dosya yüklenmezse hiçbir şey kaybolmaz.
+#
+# Aşağıdakiler yalnızca referans için — ücretsiz araçtan görünen 11 domain.
+# (Bu dosya bilerek yüklenmez.)
 
 domain:drjack.world
 domain:onvaxs.com

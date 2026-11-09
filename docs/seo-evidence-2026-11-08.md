@@ -179,3 +179,51 @@ OpenSEO keyword generator, 20 öneri (DataForSEO hacim + zorluk):
 OpenSEO ücretsiz araçları kayıt gerektirmez, DataForSEO verisi kullanır. Rate limit: IP başına dakikada 5 gönderim, günlük 40 upstream çağrı. Bu rapor 5 araç çalıştırarak hazırlandı.
 
 Ücretli sürüm ($10/ay) sayfalama, filtre ve export sağlıyor. Kendi kendine hosting (Docker/Cloudflare) mümkün — DataForSEO anahtarı gerekiyor ($50 minimum top-up).
+
+---
+
+## 9. GSC doğrulaması — 9 Kasım 2026 (ÖNEMLİ DÜZELTME)
+
+Kullanıcı GSC'den iki kanıt verdi:
+
+**a) Links raporu ekran görüntüsü** (`search.google.com/search-console/links?resource_id=sc-domain%3Acindanalsat.com`)
+
+| | GSC (Google'ın görüşü) | DataForSEO (OpenSEO) |
+|---|---|---|
+| Dış link | **1** | 53 |
+| Bağlanan site | **1** (pinterest.com) | 50 |
+| Anchor | "cindenalsat com" | PBN spam metinleri |
+
+**b) "Top target pages" export** — 1 satır:
+```
+Hedef sayfa,Gelen bağlantılar,Bağlanan siteler
+https://cindenalsat.com/,1,1
+```
+
+### Ne anlaşılıyor
+
+**Google, PBN linklerini zaten saymıyor.** GSC'nin Links raporu bir *örnektir* ve Google'ın spam filtresi tarafından süzülmüştür; DataForSEO'nun indeksi ise ham web taramasıdır. 53 linkin 52'si Google tarafından zaten göz ardı edilmiş.
+
+Bu, Google'ın kendi rehberiyle tutarlı: *"most sites will not need to use this tool"* ve *"Google can assess which links to trust without additional guidance."*
+
+### Sonuç: **Disavow gerekli DEĞİL**
+
+- GSC'de elle ceza görünmüyor (kenar çubuğunda uyarı ikonu yok)
+- Google zaten spam'i sayıyor
+- Disavow yapmak bu durumda **riskli ve gereksiz** — yanlış link reddi trafik kaybına yol açabilir
+
+**Öneri:** Disavow dosyasını **yükleme**. Tek şart: Manuel İşlemler sayfasının boş olduğunu doğrula (1 tıklama).
+
+### GSC property türü notu
+
+Property: `sc-domain:cindanalsat.com` → **Domain property**. Disavow toolu Domain property'leri **desteklemez**. Yani bu iş zaten otomatik olarak kapanıyor.
+
+---
+
+## 10. Güncel öneri (9 Kas 2026 sonrası)
+
+| # | İş | Durum |
+|---|---|---|
+| R1 | PBN disavow | **İPTAL** — Google zaten sayıyor, ceza yok, Domain property desteklemiyor |
+| R2 | Keyword ekleme | **YAPILDI** (commit `7ce84c1`) |
+| Yeni | GSC performans takibi | İsteğe bağlı — API gerektirmez, GSC UI'dan haftalık bakılabilir |
