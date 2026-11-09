@@ -240,3 +240,50 @@ Property: `sc-domain:cindanalsat.com` → **Domain property**. Disavow toolu Dom
 | R1 | PBN disavow | **İPTAL** — Google zaten sayıyor, ceza yok, Domain property desteklemiyor |
 | R2 | Keyword ekleme | **YAPILDI** (commit `7ce84c1`) |
 | Yeni | GSC performans takibi | İsteğe bağlı — API gerektirmez, GSC UI'dan haftalık bakılabilir |
+
+---
+
+## 11. Coverage raporu — 9 Kasım 2026
+
+Kullanıcı GSC Coverage export'u verdi (`cindenalsat.com-Coverage-2026-11-09.zip`).
+
+### Güncel grafik (son satır: 23 Ekim 2026)
+
+| Metrik | Değer |
+|---|---|
+| Dizine eklenen (indexed) | **9** |
+| Dizine eklenmedi (not indexed) | **33** |
+| Günlük gösterim | 6–27 |
+
+### Önemli sorunlar
+
+| Sebep | Kaynak | Doğrulama | Sayfa |
+|---|---|---|---|
+| Bulunamadı (404) | Web sitesi | Başladı | **18** |
+| Keşfedildi — dizine eklenmemiş | Google sistemleri | Başlatılmadı | **9** |
+| Tarandı — dizine eklenmemiş | Google sistemleri | Başlatılmadı | **4** |
+| Yönlendirmeli sayfa | Web sitesi | Başlatılmadı | 1 |
+| Doğru canonical'a sahip alternatif | Web sitesi | Başlatılmadı | 1 |
+| Kullanıcı seçimli canonicalsız kopya | Web sitesi | Yok | 0 |
+
+### Kök neden: sitemap eksikti
+
+**Sitemap 14 URL içeriyordu, sitede 29 sayfa var.**
+
+- 15 blog yazısı sitemap'de **yoktu** → Google'a hiç verilmiyordu
+- Bu 15 yazı, "Keşfedildi — dizine eklenmemiş" (9) + "Tarandı — dizine eklenmemiş" (4) ile büyük ölçüde örtüşüyor
+
+**Düzeltme:** `public/sitemap.xml` yeniden üretildi → **29 URL** (7 ana sayfa + 22 blog). Tümü 200 dönüyor. Commit `4e6915b`.
+
+### 18 adet 404 hâlâ açık
+
+CSV yalnızca sayaç veriyor, URL listesi içermiyor. Bulmak için GSC arayüzünden:
+- **Coverage → "Bulunamadı (404)"** satırına tıkla → URL listesini aç
+
+Site içi tarama (ana sayfalar + 16 blog yazısı + tüm dahili linkler) **0 hata** buldu — yani 404'ler muhtemelen eski URL'ler (site yeniden build edilmeden önceki) veya dış kaynaklı ölü linkler.
+
+### Ne yapılmalı
+
+1. **Sitemap'i yeniden gönder:** GSC → Site Haritaları → `sitemap.xml` → Yeniden Gönder
+2. **404 listesini al:** Coverage → 404 satırı → URL'ler → bana ver, düzeltirim (301 yönlendirme veya kaldırma)
+3. **Yeni sayfalar:** Artık Google'a veriliyor; 2-4 hafta içinde indexlenme beklenir
