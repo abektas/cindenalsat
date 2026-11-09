@@ -214,6 +214,19 @@ Bu, Google'ın kendi rehberiyle tutarlı: *"most sites will not need to use this
 
 **Öneri:** Disavow dosyasını **yükleme**. Tek şart: Manuel İşlemler sayfasının boş olduğunu doğrula (1 tıklama).
 
+### ✅ Doğrulama tamamlandı (9 Kas 2026, 09:20)
+
+GSC → Güvenlik ve Manuel İşlemler → **Manuel İşlemler** sayfası:
+
+> **"Hiçbir sorun algılanmadı"**
+
+Cezay kaydı yok, liste yok. URL: `search.google.com/search-console/manual-actions?resource_id=sc-domain%3Acindenalsat.com`
+
+**Görev 1 resmen kapandı** — üç koşul da doğrulandı:
+1. Elle ceza yok ✓
+2. Google spam'i zaten sayıyor ✓
+3. Domain property → disavow toolu desteklemiyor ✓
+
 ### GSC property türü notu
 
 Property: `sc-domain:cindanalsat.com` → **Domain property**. Disavow toolu Domain property'leri **desteklemez**. Yani bu iş zaten otomatik olarak kapanıyor.
