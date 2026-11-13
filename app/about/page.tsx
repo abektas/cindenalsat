@@ -1,3 +1,5 @@
+'use client'
+
 import { useLocale } from '@/lib/locale-context'
 import { AboutSection } from '@/components/about-section'
 
