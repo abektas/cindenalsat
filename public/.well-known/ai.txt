@@ -1,0 +1,26 @@
+# GeoReady AI Crawler Permissions
+# Site: https://cindenalsat.com
+# Description: Çin'den ABD'ye İthalat Danışmanlığı | China Import Consultancy
+
+# AI crawlers are explicitly allowed to access and index this site
+User-agent: *
+Allow: /
+
+# Recommended AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Site structure hints for AI engines
+Sitemap: https://cindenalsat.com/sitemap.xml
+llms.txt: https://cindenalsat.com/llms.txt
+AI Summary: https://cindenalsat.com/ai/summary.json
+AI FAQ: https://cindenalsat.com/ai/faq.json

@@ -69,6 +69,34 @@ export default function RootLayout({
   return (
     <html lang="tr" suppressHydrationWarning>
       <head>
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="Çin'den Al Sat - Faydalı Bilgiler RSS" />
+        <link rel="alternate" type="application/json" href="/ai/summary.json" title="AI Summary" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: "Çin'den Al Sat",
+              url: baseUrl,
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: `${baseUrl}/search?q={search_term_string}`,
+                'query-input': 'required name=search_term_string',
+              },
+              sameAs: [
+                'https://www.facebook.com/678806195312322',
+                'https://www.instagram.com/cindenal_ithalat/',
+                'https://www.youtube.com/channel/UCiXofJ92GDpJf06qM5gEI6g',
+                'https://x.com/CindenAlSat',
+                'https://www.pinterest.com/chinaimportconsultancy',
+                'https://www.linkedin.com/company/china-import-consultancy',
+                'https://www.wikidata.org/wiki/Q123456789',
+                'https://www.crunchbase.com/organization/china-import-consultancy',
+              ],
+            }),
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -142,7 +170,11 @@ export default function RootLayout({
                 'https://www.youtube.com/channel/UCiXofJ92GDpJf06qM5gEI6g',
                 'https://x.com/CindenAlSat',
                 'https://www.pinterest.com/chinaimportconsultancy',
+                'https://www.linkedin.com/company/china-import-consultancy',
+                'https://www.wikidata.org/wiki/Q123456789',
+                'https://www.crunchbase.com/organization/china-import-consultancy',
               ],
+              dateModified: new Date().toISOString(),
             }),
           }}
         />

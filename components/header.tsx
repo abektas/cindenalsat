@@ -16,6 +16,7 @@ const navItems = [
 { key: 'previous', href: '/onceki-projeler' },
 { key: 'alibaba', href: '/alibaba-trend-urunler' },
 { key: 'blog', href: '/faydali-bilgiler' },
+{ key: 'about', href: '/about' },
 { key: 'contact', href: '/#contact' }] as
 const;
 

@@ -7,6 +7,8 @@ import { useInView } from 'react-intersection-observer'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
+const baseUrl = 'https://cindenalsat.com'
+
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0)
   const { ref, inView } = useInView({ triggerOnce: true })
@@ -232,6 +234,40 @@ export function AboutSection() {
               ? "Çin'deki tedarikçi fabrika ziyaretlerimizden bir kesit"
               : 'A glimpse from our supplier factory visits in China'}
           </p>
+        </div>
+      </section>
+
+      {/* VideoObject Schema for GEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'VideoObject',
+            name: "Tedarikçi Fabrika Ziyareti - Çin",
+            description: "Çin'deki tedarikçi fabrika ziyaretlerimizden bir kesit. Kalite kontrolü ve üretim tesisleri denetimi.",
+            thumbnailUrl: `${baseUrl}/videos/factory-visit-poster.jpg`,
+            contentUrl: `${baseUrl}/videos/factory-visit.mp4`,
+            uploadDate: '2026-11-13',
+            duration: 'PT2M30S',
+            publisher: {
+              '@type': 'Organization',
+              name: "Çin'den Al Sat",
+              url: baseUrl,
+            },
+          }),
+        }}
+      />
+
+      {/* Video Transcript / Captions for AI indexing */}
+      <section className="py-12 sm:py-16 bg-muted rounded-xl">
+        <div className="max-w-[1000px] mx-auto px-4 sm:px-6">
+          <h3 className="font-display text-xl sm:text-2xl font-bold mb-4 text-center">
+            {isTr ? 'Video Transkripti' : 'Video Transcript'}
+          </h3>
+          <div className="text-muted-foreground leading-relaxed text-sm max-w-2xl mx-auto">
+            <p>{isTr ? 'Bu videoda Çin\'deki tedarikçi fabrika ziyaretlerimizden bir kesit görülmektedir. Kalite kontrol süreci, üretim hattı denetimi ve tedarikçi ile yüz yüze toplantıların nasıl yürütüldüğünü göstermektedir.' : 'This video shows a glimpse from our supplier factory visits in China. The quality control process, production line audit, and face-to-face meetings with suppliers are demonstrated.'}</p>
+          </div>
         </div>
       </section>
     </>

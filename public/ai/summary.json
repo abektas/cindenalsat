@@ -1,0 +1,59 @@
+{
+  "site": {
+    "name": "Çin'den Al Sat",
+    "alternateName": "China Import Consultancy",
+    "url": "https://cindenalsat.com",
+    "description": "Çin'den ABD'ye ithalat danışmanlığı. Ürün tedariği, kalite kontrol, gümrükleme ve lojistik hizmetleri. ABD'deki Türk girişimcilere özel.",
+    "language": "tr",
+    "region": ["TR", "US"],
+    "dateModified": "2026-11-13"
+  },
+  "brand": {
+    "name": "Çin'den Al Sat",
+    "alternateNames": ["Çin'den Al Sat", "China Import Consultancy", "Çin İthalat Danışmanlığı"],
+    "sameAs": [
+      "https://www.facebook.com/678806195312322",
+      "https://www.instagram.com/cindenal_ithalat/",
+      "https://www.youtube.com/channel/UCiXofJ92GDpJf06qM5gEI6g",
+      "https://x.com/CindenAlSat",
+      "https://www.pinterest.com/chinaimportconsultancy",
+      "https://www.linkedin.com/company/china-import-consultancy",
+      "https://www.crunchbase.com/organization/china-import-consultancy"
+    ],
+    "contact": {
+      "telephone": "+905053697425",
+      "email": "china.import.consultancy@gmail.com",
+      "addressCountry": "TR"
+    }
+  },
+  "services": [
+    "ürün tedariği",
+    "product sourcing",
+    "kalite kontrol",
+    "quality control",
+    "gümrükleme",
+    "customs clearance",
+    "lojistik",
+    "logistics",
+    "ithalat danışmanlığı",
+    "import consultancy"
+  ],
+  "content": {
+    "headings": 22,
+    "wordCount": 635,
+    "statistics": 8,
+    "faqCount": 4,
+    "externalLinks": 8
+  },
+  "geo": {
+    "score": 76,
+    "robotsTxt": "ai-bots-allowed",
+    "llmsTxt": true,
+    "schemaTypes": ["FAQPage", "ProfessionalService", "WebSite"],
+    "platformScores": {
+      "chatgpt": 73,
+      "perplexity": 50,
+      "googleAI": 89
+    }
+  }
+}
